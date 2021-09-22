@@ -3,6 +3,8 @@ Get any type of proxies in 1 click!
 
 version: 1.0
 
+By: Zelow#9999
+
 ## Download
 
 You can download the `proxy_scraper` module with Python Package Index (PyPI).
