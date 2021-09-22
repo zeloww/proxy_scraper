@@ -3,7 +3,7 @@ Get any type of proxies in 1 click!
 
 version: 1.0
 
-By: Zelow#9999
+author: Zelow#9999
 
 ## Download
 
