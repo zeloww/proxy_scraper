@@ -94,8 +94,8 @@ The module using the API of proxyscrape: `https://docs.proyscrape.com`
 `request_url` **Type** -> `string`, **Default** -> `'https://google.com'` Choice the website to try if the proxy work
 
 ## Exemples
-![image](https://cdn.discordapp.com/attachments/890172654605180938/890305570010202132/unknown.png)
+![image](https://cdn.discordapp.com/attachments/890172654605180938/890666366661713930/unknown.png)
 
-![image](https://cdn.discordapp.com/attachments/890172654605180938/890305570165379112/unknown-1.png)
+![image](https://cdn.discordapp.com/attachments/890172654605180938/890666394352517150/unknown.png)
 
-![image](https://cdn.discordapp.com/attachments/890172654605180938/890305570324750406/unknown-2.png) 
+![image](https://cdn.discordapp.com/attachments/890172654605180938/890666417819631697/unknown.png) 
