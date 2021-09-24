@@ -12,7 +12,7 @@ author: Zelow#9999
 
 ## Download
 
-You can download the `proxy_scraper` module with Python Package Index (PyPI).
+You can download the `https://pypi.org/project/proxy_scraper` module with Python Package Index (PyPI).
 
 ### Download with pip:
 
