@@ -3,7 +3,7 @@ Get any type of proxies in 1 click!
 
 version: 1.0
 
-author: Zelow#9999
+author: github.com/zeloww
 
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
 [![PyPi version](https://badgen.net/pypi/v/pip/)](https://pypi.com/project/pip)
@@ -12,7 +12,7 @@ author: Zelow#9999
 
 ## Download
 
-You can download the `https://pypi.org/project/proxy_scraper` module with Python Package Index (PyPI).
+You can download the `https://PyPi.org/project/proxy_scraper` module with Python Package Index (PyPI).
 
 ### Download with pip:
 
