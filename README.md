@@ -18,7 +18,7 @@ You can download the `https://PyPi.org/project/proxy_scraper` module with Python
 
 `$ pip install proxy_scraper`
 
-## Exemples
+## Examples
 
 ### getproxy()
 
