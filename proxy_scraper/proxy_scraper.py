@@ -4,7 +4,7 @@ from random import choice
 class proxies:
     proxies_list = []
 
-    def getproxies(dict:bool=False, checker:bool=False, number:int=None, auth:str=None, download:bool=False, type:str="all", country:str="all", timeout:int=1500, ssl:bool=True, anonymity:str="all", format:str="normal", url:str=None, request_url:str="https://google.com/"):
+    def getproxies(dict:bool=False, checker:bool=False, number:int=None, auth:str=None, download:bool=False, type:str="all", country:str="all", timeout:int=5, ssl:bool=True, anonymity:str="all", format:str="normal", url:str=None, request_url:str="https://google.com/"):
         proxies_list = []
         i = 0
         
@@ -61,7 +61,7 @@ class proxies:
         else:
             return proxies.proxies_list
 
-    def getproxy(dict:bool=False, checker:bool=False, number:int=None, auth:str=None, download:bool=False, type:str="all", country:str="all", timeout:int=1500, ssl:bool=True, anonymity:str="all", format:str="normal", url:str=None, request_url:str="https://google.com/"):
+    def getproxy(dict:bool=False, checker:bool=False, number:int=None, auth:str=None, download:bool=False, type:str="all", country:str="all", timeout:int=5, ssl:bool=True, anonymity:str="all", format:str="normal", url:str=None, request_url:str="https://google.com/"):
         proxies_list = []
         i = 0
 
@@ -116,7 +116,7 @@ class proxies:
         else:
             return choice(proxies.proxies_list)
 
-    def proxies_checker(number:int=None, file:str=None, url:str=None, request_url:str=None, timeout:int=1500):
+    def proxies_checker(number:int=None, file:str=None, url:str=None, request_url:str=None, timeout:int=5):
         i = 0
 
         proxies_dict = {
