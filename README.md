@@ -5,15 +5,56 @@ version: 1.0
 
 author: Zelow#9999
 
-## Download
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+[![PyPi version](https://badgen.net/pypi/v/pip/)](https://pypi.com/project/pip)
+[![PyPi license](https://img.shields.io/pypi/l/fpvgcc.svg?color=blue)](https://pypi.com/project/pip/)
+![PyPi download](https://pepy.tech/badge/proxy_scraper)
 
-`https://pypi.org/project/proxy_scraper`
+## Download
 
 You can download the `proxy_scraper` module with Python Package Index (PyPI).
 
 ### Download with pip:
 
 `$ pip install proxy_scraper`
+
+## Exemples
+
+### getproxy()
+
+```py
+from proxy_scraper import getproxy
+print(getproxy(type="https", timeout=10)
+
+>>> 88.198.24.108:1080
+```
+
+### getproxies()
+
+```py
+from proxy_scraper import getproxies
+print(getproxies(type="http", number=2)
+
+>>> ['104.255.170.91:51676', '88.198.24.108:1080']
+```
+
+### proxies_checker()
+
+```py
+from proxy_scraper import proxies_checker
+print(proxies_checker(url="https://api.proxyscrape.com/v2/?request=displayproxies&protocol=socks4&timeout=100")
+
+>>> {
+        'file: None': [],
+        'url: https://api.proxyscrape.com/v2/?request=displayproxies&protocol=socks4&timeout=5': [
+            '217.149.135.21:5678',
+            '54.38.163.25:5678',
+            '185.216.163.133:1080',
+            '185.161.245.1:1080',
+            '179.49.117.166:5678',
+        ]
+     }
+```
 
 ## Documentation
 
@@ -92,10 +133,3 @@ The module using the API of proxyscrape: `https://docs.proyscrape.com`
 `number`: **Type** -> `boolean`, **Default** -> `None` Choice a number of good proxies for end the checking
 
 `request_url` **Type** -> `string`, **Default** -> `'https://google.com'` Choice the website to try if the proxy work
-
-## Exemples
-![image](https://cdn.discordapp.com/attachments/890172654605180938/890666366661713930/unknown.png)
-
-![image](https://cdn.discordapp.com/attachments/890172654605180938/890666394352517150/unknown.png)
-
-![image](https://cdn.discordapp.com/attachments/890172654605180938/890666417819631697/unknown.png) 
