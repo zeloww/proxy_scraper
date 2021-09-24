@@ -12,7 +12,7 @@ except OSError:
 
 setup(
     name='proxy_scraper',
-    version='1.0',
+    version='1.2',
     license='GPLv3+',
     authors=['zelow'],
     url="https://github.com/zeloww/proxy_scraper",
