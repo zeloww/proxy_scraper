@@ -1,7 +1,7 @@
 # Proxy_Scraper
 Get any type of proxies in 1 click!
 
-version: 1.2
+version: 1.3
 
 author: github.com/zeloww
 
