@@ -1,1 +1,1 @@
-from .proxy_scraper import getproxy, getproxies, proxies_checker
+from .proxy_scraper import check_proxy, check_proxies_from_file, get_proxies
