@@ -1,14 +1,8 @@
+import io
 from setuptools import setup
-import pypandoc
 
-try:
-    long_description = pypandoc.convert_file('README.md', 'rst')
-    long_description = long_description.replace("\r","")
-
-except OSError:
-    import io
-    with io.open('README.md', encoding="utf-8") as f:
-        long_description = f.read()
+with io.open('README.md', encoding="utf-8") as f:
+    long_description = f.read()
 
 setup(
     name='proxy_scraper',
