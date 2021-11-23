@@ -21,9 +21,8 @@ You can download the module [here](https://pypi.org/project/proxy_scraper).
 
 ```py
 from proxy_scraper import get_proxies
-# Creates a lambda function to return randomly only one proxy.
-# WARN : they are not checked !
-get_proxy = lambda t, d: __import__("random").choice(get_proxies(type=t, timeout=d))
+# Creates a lambda function to return 5 randomly proxies.
+get_proxy = lambda t, d: __import__("random").choice(get_proxies(type=t, timeout=d, limit=5))
 print(get_proxy("https", 10)
 
 >>> 88.198.24.108:1080
