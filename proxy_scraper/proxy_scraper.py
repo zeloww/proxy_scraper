@@ -1,171 +1,84 @@
+import random
 from urllib import request
-from random import choice
 
-def getproxy(dict:bool=False, checker:bool=False, number:int=None, auth:str=None, download:bool=False, type:str="all", country:str="all", timeout:int=5, ssl:bool=True, anonymity:str="all", format:str="normal", url:str=None, request_url:str="https://google.com/"):
-    proxies_list = []
-    i = 0
 
-    if ssl:
-        ssl = "yes"
-    else:
-        ssl = "no"
+def check_proxy(proxy: str, url: str, timeout: int) -> bool:
+    proxy_handler = request.ProxyHandler({
+        "https": "http://" + proxy,
+        "http": "http://" + proxy,
+        "socks4": "socks4://" + proxy,
+        "socks5": "socks5://" + proxy
+    })
+    opener = request.build_opener(proxy_handler)
+    opener.addheaders = [
+        ('User-Agent', 'Mozilla/5.0  (Windows NT 6.1; Win64; x64)')]
+    request.install_opener(opener)
+    result = True
+    try:
+        response = request.urlopen(url, timeout=timeout)
+    except:
+        result = False
+    finally:
+        response.close()
+        return result
 
-    if download:
-        download = "getproxies"
-    else:
-        download = "displayproxies"
 
-    if not url:
-        url = f"https://api.proxyscrape.com/?auth={auth}&request={download}&proxytype={type}&timeout={timeout}&ssl={ssl}&anonimity={anonymity}&country={country}&format={format}".replace(",", "&").replace(" ", "") 
+def get_proxies(checker: bool = False,
+                limit: int = None,
+                auth: str = None,
+                download: bool = False,
+                type: str = "all",
+                country: str = "all",
+                timeout: int = 1000,  # In ms
+                ssl: bool = True,
+                anonymity: str = "all",
+                format: str = "normal",
+                request_url: str = "https://google.com/"):
+    proxies = []
 
-    response = request.urlopen(url).read().decode("utf-8").replace("\r", "")
+    ssl = "yes" if ssl else "no"
+    download = "getproxies" if download else "displayproxies"
+    url = f"https://api.proxyscrape.com/?auth={auth}&request={download}&proxytype={type}&timeout={timeout}&ssl={ssl}&anonimity={anonymity}&country={country}&format={format}".replace(
+            ",", "&").replace(" ", "")
 
-    for proxy in response.splitlines():
-        if number == i:
+    http = request.Request(url)
+    with request.urlopen(http) as response:
+        data = response.read().decode("utf-8")
+    response.close()
+
+    for i, proxy in enumerate(data.split("\r\n")):
+        if proxy == '':
+            continue
+        elif limit and limit == i:
             break
+        elif not checker:
+            proxies.append(proxy)
+            continue
+        elif check_proxy(proxy, request_url, timeout):
+            proxies.append(proxy)
 
-        if checker:
-            try:
-                proxy_handler = request.ProxyHandler({
-                "https": "http://" + proxy,
-                "http": "http://" + proxy
-                })
+    return proxies
 
-                opener = request.build_opener(proxy_handler)
-                opener.addheaders = [('User-Agent', 'Mozilla/5.0  (Windows NT 6.1; Win64; x64)')]
-                request.install_opener(opener)
 
-                response = request.urlopen(request_url, timeout=timeout)
+def check_proxies_from_file(file: str,
+                            limit: int = None,
+                            timeout: int = 1000, # In ms
+                            request_url: str = "https://google.com/"):
+    proxies = []
+
+    try:
+        with open(file, "r", encoding="utf-8") as f:
+            content = f.read()
+        f.close()
+    except OSError:
+        return proxies
+    else:
+        for i, proxy in enumerate(content.split("\r\n")):
+            if proxy == '':
+                continue
+            elif limit and limit == i:
+                break
+            elif check_proxy(proxy, request_url, timeout):
                 proxies.append(proxy)
 
-            except:
-                pass
-
-        else:
-            proxies_list.append(proxy)
-
-        i += 1
-
-    if dict:
-        proxies_dict = {
-        type: type + "://" + choice(proxies_list)
-        }
-
-        return proxies_dict
-
-    else:
-        return choice(proxies_list)
-
-def getproxies(dict:bool=False, checker:bool=False, number:int=None, auth:str=None, download:bool=False, type:str="all", country:str="all", timeout:int=5, ssl:bool=True, anonymity:str="all", format:str="normal", url:str=None, request_url:str="https://google.com/"):
-    proxies_list = []
-    i = 0
-    
-    if ssl:
-        ssl = "yes"
-    else:
-        ssl = "no"
-
-    if download:
-        download = "getproxies"
-    else:
-        download = "displayproxies"
-
-    if not url:
-        url = f"https://api.proxyscrape.com/?auth={auth}&request={download}&proxytype={type}&timeout={timeout}&ssl={ssl}&anonimity={anonymity}&country={country}&format={format}".replace(",", "&").replace(" ", "") 
-
-    response = request.urlopen(url).read().decode("utf-8").replace("\r", "")
-
-    for proxy in response.splitlines():
-        if number == i:
-            break
-
-        if checker:
-            try:
-                proxy_handler = request.ProxyHandler({
-                "https": "http://" + proxy,
-                "http": "http://" + proxy,
-                "socks4": "socks4://" + proxy,
-                "socks5": "socks5://" + proxy
-                })
-
-                opener = request.build_opener(proxy_handler)
-                opener.addheaders = [('User-Agent', 'Mozilla/5.0  (Windows NT 6.1; Win64; x64)')]
-                request.install_opener(opener)
-
-                response = request.urlopen(request_url, timeout=timeout)
-                proxies_list.append(proxy)
-
-            except:
-                pass
-
-        else:
-            proxies_list.append(proxy)
-
-        i += 1
-
-    if dict:
-        proxies_dict = {
-        type: type + "://" + proxies_list
-        }
-
-        return proxies_dict
-
-    else:
-        return proxies_list
-
-def proxies_checker(number:int=None, file:str=None, url:str=None, request_url:str=None, timeout:int=5):
-    i = 0
-
-    proxies_dict = {
-        f"file: {file}": [],
-        f"url: {url}": []
-    }
-
-    if not request_url:
-        request_url = "https://google.com/"
-
-    if file:
-        with open(file, "r") as f:
-            for proxy in f.splitlines():
-                if number:
-                    if number == i:
-                        break
-                try:
-                    proxy_handler = request.ProxyHandler({
-                    "https": "http://" + proxy,
-                    "http": "http://" + proxy
-                    })
-
-                    opener = request.build_opener(proxy_handler)
-                    opener.addheaders = [('User-Agent', 'Mozilla/5.0  (Windows NT 6.1; Win64; x64)')]
-                    request.install_opener(opener)
-
-                    response = request.urlopen(request_url, timeout=timeout)
-                    proxies_dict[f"url: {url}"].append(proxy)
-                    i += 1
-                except:
-                    pass
-
-    if url:
-        response = request.urlopen(url).read().decode("utf-8").replace("\r", "")
-        for proxy in response.splitlines():
-            if number:
-                if number == i:
-                    break
-            try:
-                proxy_handler = request.ProxyHandler({
-                "https": "http://" + proxy,
-                "http": "http://" + proxy
-                })
-
-                opener = request.build_opener(proxy_handler)
-                opener.addheaders = [('User-Agent', 'Mozilla/5.0  (Windows NT 6.1; Win64; x64)')]
-                request.install_opener(opener)
-
-                response = request.urlopen(request_url, timeout=timeout)
-                proxies_dict[f"url: {url}"].append(proxy)
-                i += 1
-            except:
-                pass
-
-    return proxies_dict
+    return proxies
